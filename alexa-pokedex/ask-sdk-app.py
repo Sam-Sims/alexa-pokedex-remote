@@ -20,7 +20,7 @@ def pokemon_intent_handler(handler_input):
     pokemon_species = pokedex.get_species()
     pokemon_data = pokedex.get_pokemon_data(pokemon_species)
     pokemon = pokedex.generate_alexa_text_string(pokemon_species, pokemon_data)
-    speech_text = "Your pokemon today is {}. Goodbye!!".format(pokemon)
+    speech_text = "{}".format(pokemon)
     return handler_input.response_builder.speak(speech_text).set_card( SimpleCard("Pokedex", speech_text)).set_should_end_session(True).response
 
 

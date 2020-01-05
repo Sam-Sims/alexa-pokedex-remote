@@ -1,5 +1,7 @@
 import requests
+import random
 from random import randint
+
 
 base_url = 'https://pokeapi.co/api/v2/'
 
@@ -22,6 +24,12 @@ def get_pokemon_data(pokemon_species):
     return None
 
 def generate_alexa_text_string(pokemon_species, pokemon):
-    text = pokemon_species['name']
+    flavor_texts = (x for x in pokemon_species['flavor_text_entries'] if x['language']['name'] == 'en')
+    flavor_text = random.choice(list(flavor_texts))['flavor_text'].replace('\n', ' ').replace('\t', ' ')
+    text = "Your pokemon is " + pokemon_species['name'] + ". " + flavor_text
     return text
+
+pokemon_species = get_species()
+pokemon_data = get_pokemon_data(pokemon_species)
+print(generate_alexa_text_string(pokemon_species, pokemon_data))
 

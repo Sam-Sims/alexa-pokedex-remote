@@ -25,8 +25,3 @@ def generate_alexa_text_string(pokemon_species, pokemon):
     text = pokemon_species['name']
     return text
 
-pokemon_species = get_species()
-pokemon_data = get_pokemon_data(pokemon_species)
-pokemon = generate_alexa_text_string(pokemon_species, pokemon_data)
-speech_text = "Your pokemon today is {}. Goodbye!!".format(pokemon)
-

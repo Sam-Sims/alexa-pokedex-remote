@@ -18,4 +18,4 @@ Resources:
         AlexaSkillEvent:
           Type: AlexaSkill
           Properties:
-            SkillId: amzn1.ask.skill.4dfa3490-f617-4dc3-8322-f096e78a17c5
+            SkillId:

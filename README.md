@@ -19,3 +19,10 @@ To use the SAM CLI, you need the following tools.
 Refer to the SAM CLI documentation - [Here](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-sam-reference.html)
 
 You can find your API Gateway Endpoint URL after deployment.
+
+## Usage
+
+"alexa ask pokedex tools to give me a pokemon"
+
+## TODO
+* Create a models.json to define the alexa intents rather than manually creating them

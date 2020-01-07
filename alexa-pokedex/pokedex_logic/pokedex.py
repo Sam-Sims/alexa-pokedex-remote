@@ -11,6 +11,7 @@ def get_species():
     # Pick a random number between 1 and 807 - the national dex range
     id = str(randint(1, 807))
     r = requests.get(base_url + 'pokemon-species/' + id)
+    print(base_url + 'pokemon-species/' + id)
     return r.json()
 
 
@@ -20,15 +21,29 @@ def get_pokemon_data(pokemon_species):
     default_variety = next((v for v in pokemon_species['varieties'] if v['is_default'] is True), None)
     if default_variety is not None:
         r = requests.get(default_variety['pokemon']['url'])
+        print(default_variety['pokemon']['url'])
         return r.json()
     return None
 
+
 def generate_alexa_text_string(pokemon_species, pokemon):
-    flavor_texts = (x for x in pokemon_species['flavor_text_entries'] if x['language']['name'] == 'en')
-    flavor_text = random.choice(list(flavor_texts))['flavor_text'].replace('\n', ' ').replace('\t', ' ')
-    text = "Your pokemon is " + pokemon_species['name'] + ". " + flavor_text
+    # Extracts english version of flavour text and compiles them into a list
+    flavor_texts = list((x for x in pokemon_species['flavor_text_entries'] if x['language']['name'] == 'en'))
+    flavor_text_unformatted = random.choice(flavor_texts)['flavor_text']
+    # Flavor text contains /n that needs to be removed
+    flavor_text = flavor_text_unformatted.replace('\n', ' ')
+
+    # Extracts english genus
+    genus = (next(x for x in pokemon_species['genera'] if x['language']['name'] == 'en'))['genus']
+
+    colour = pokemon_species['color']['name']
+    name = pokemon_species['name']
+
+    text = f"Your pokemon is {name}, the {genus}. It is {colour}. {flavor_text}"
     return text
 
+
+# For local testing
 pokemon_species = get_species()
 pokemon_data = get_pokemon_data(pokemon_species)
 print(generate_alexa_text_string(pokemon_species, pokemon_data))

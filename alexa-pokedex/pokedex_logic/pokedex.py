@@ -38,8 +38,13 @@ def generate_alexa_text_string(pokemon_species, pokemon):
 
     colour = pokemon_species['color']['name']
     name = pokemon_species['name']
+    types = '' \
+            ''
+    for i in pokemon['types']:
+        types = types + i['type']['name']
+        types = types + ", "
 
-    text = f"Your pokemon is {name}, the {genus}. It is {colour}. {flavor_text}"
+    text = f"Your pokemon is {name}, the {genus}. It is a {colour} {types} type pokemon. {flavor_text}"
     return text
 
 

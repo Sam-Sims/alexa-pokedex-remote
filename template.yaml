@@ -1,0 +1,21 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+
+
+Globals:
+  Function:
+    Timeout: 3
+    Runtime: python3.7
+
+Resources:
+  AlexaPokedexFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: alexa-pokedex/
+      Handler: ask-sdk-app.lambda_handler
+      Runtime: python3.7
+      Events:
+        AlexaSkillEvent:
+          Type: AlexaSkill
+          Properties:
+            SkillId: amzn1.ask.skill.4dfa3490-f617-4dc3-8322-f096e78a17c5

@@ -39,11 +39,17 @@ def generate_alexa_text_string(pokemon_species, pokemon):
     colour = pokemon_species['color']['name']
     name = pokemon_species['name']
 
-    # TODO - types string needs formatting
+    # Pokemon can have more than one type
     types = ''
-    for i in pokemon['types']:
-        types = types + i['type']['name']
-        types = types + ", "
+    type_count = len(pokemon['types'])
+    if type_count == 1:
+        for i in pokemon['types']:
+            types = types + i['type']['name']
+    elif type_count == 2:
+        for i, t in enumerate(pokemon['types']):
+            types = types + t['type']['name']
+            if type_count > 1 and i < type_count - 1:
+                types = types + ' and '
 
     text = f"Your pokemon is {name}, the {genus}. Its colour is {colour} and is a {types} type pokemon. {flavor_text}"
     return text
